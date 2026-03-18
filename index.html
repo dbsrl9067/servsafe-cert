@@ -292,6 +292,11 @@
           <th>Cert#</th>
           <th>Exam<br/>Date</th>
           <th>Expires</th>
+          <th>Instructor</th>
+          <th>Sponsor</th>
+          <th>Program</th>
+          <th>State</th>
+          <th>Valid?</th>
         </tr>
       </thead>
       <tbody id="certBody"></tbody>
@@ -449,9 +454,9 @@ const certs = [
     cert: "2479541",
     examDate: "2/21/2025",
     expires: "2/21/2030",
-    instructor: "",
-    sponsor: "",
-    program: "ServSafe: Food Protection Manager Certification- Generic ServSafe Food Protection Manager Certificate",
+    instructor: "So Hee\nPark",
+    sponsor: "UNIVERSITY\nOF\nHOUSTON\nREST &\nHOSP\nMGMT",
+    program: "ServSafe:\nFood\nProtection\nManager\nCertification-\nGeneric\nServSafe\nFood\nProtection\nManager\nCertificate",
     state: "",
     valid: "Valid"
   }
@@ -466,6 +471,11 @@ function render() {
       <td>${c.cert}</td>
       <td class="bold">${c.examDate}</td>
       <td class="bold">${c.expires}</td>
+      <td style="white-space:pre-line">${c.instructor || ''}</td>
+      <td style="white-space:pre-line">${c.sponsor || ''}</td>
+      <td style="white-space:pre-line">${c.program || ''}</td>
+      <td>${c.state || ''}</td>
+      <td>${c.valid || ''}</td>
     </tr>
   `).join('');
 }
