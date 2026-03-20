@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/v/:cert/:name", "destination": "/index.html" }
+  ]
+}

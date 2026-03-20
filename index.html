@@ -462,6 +462,24 @@ const certs = [
   }
 ];
 
+function renderFiltered(list) {
+  const tbody = document.getElementById('certBody');
+  tbody.innerHTML = list.map(c => `
+    <tr>
+      <td>${c.last}</td>
+      <td style="white-space:pre-line">${c.first}</td>
+      <td>${c.cert}</td>
+      <td class="bold">${c.examDate}</td>
+      <td class="bold">${c.expires}</td>
+      <td style="white-space:pre-line">${c.instructor || ''}</td>
+      <td style="white-space:pre-line">${c.sponsor || ''}</td>
+      <td style="white-space:pre-line">${c.program || ''}</td>
+      <td>${c.state || ''}</td>
+      <td>${c.valid || ''}</td>
+    </tr>
+  `).join('');
+}
+
 function render() {
   const tbody = document.getElementById('certBody');
   tbody.innerHTML = certs.map(c => `
@@ -491,7 +509,21 @@ function closeDrawer() {
   document.body.style.overflow = '';
 }
 
-document.addEventListener("DOMContentLoaded", render);
+document.addEventListener("DOMContentLoaded", () => {
+  // URL에서 /v/:cert/:name 파싱
+  const path = window.location.pathname;
+  const match = path.match(/^\/v\/([^\/]+)\/([^\/]+)/);
+  if (match) {
+    const certId = match[1];
+    const lastName = match[2].toUpperCase();
+    const found = certs.find(c => c.cert === certId && c.last === lastName);
+    if (found) {
+      renderFiltered([found]);
+      return;
+    }
+  }
+  render();
+});
 </script>
 </body>
 </html>
